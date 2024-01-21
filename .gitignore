@@ -1,0 +1,26 @@
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
+.DS_Store
+
+*.code-workspace
+db/init/*
+db/mysql/*
+php/connect.php
+php/images/*
+php/imgword/*
+proxy/
+engine/
+php/audio/*
+ppp_*
+ads.txt
+old/
+yandex_*
+google*
+*.lock
+php/vendor
+php/templates/cache/*
+config/connect.php
+*.xml

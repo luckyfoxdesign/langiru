@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+
+  mdb:
+    image: mysql:5.7.18
+    container_name: mdb_c
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3306:3306
+    volumes:
+      # - ./db/init/:/docker-entrypoint-initdb.d/ - don't work with ladge files
+      - ./db/mysql/:/var/lib/mysql
+    env_file:
+      - ./config/.env
+
+  php:
+    build: 
+      context: ./php
+      dockerfile: Dockerfile
+    container_name: php_c
+    ports: 
+      - 80:80
+    working_dir: /var/www/html/
+    restart: always
+    depends_on:
+      mdb:
+        condition: service_started
+    volumes:
+      - ./php:/var/www/html/
+      - ./config/connect.php:/var/www/html/connect.php
+      - ./config/.htaccess:/var/www/html/.htaccess
+
+  adminer:
+    image: adminer
+    restart: always
+    container_name: adminer_c
+    environment:
+      ADMINER_DEFAULT_SERVER: mdb
+    depends_on:
+      mdb:
+        condition: service_started
+    ports:
+      - 8080:8080

@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /404.php
+Disallow: /not-found.php
+Disallow: /*-not-found
+
+Sitemap: https://langi.ru/sitemap/sitemap-1.xml

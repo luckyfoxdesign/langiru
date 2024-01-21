@@ -1,0 +1,9 @@
+AddDefaultCharset UTF-8
+RewriteEngine On
+
+RewriteRule  ^(.*)-na-anglijskom-perevod-primery			item.php?url=$1 [L,QSA]
+RewriteRule  ^(.*)-na-russkom-perevod-primery			item_en.php?url=$1 [L,QSA]
+RewriteRule  ^(.*)-not-found			not-found.php?url=$1 [L,QSA]
+
+# Redirect non-existent paths to a custom 404 page
+ErrorDocument 404 /404.php

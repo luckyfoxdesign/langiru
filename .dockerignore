@@ -1,0 +1,23 @@
+old_source
+langi.code-workspace
+astro/node_modules
+.DS_Store
+
+# Ignore Docker and Docker Compose files
+docker-compose.yml
+Dockerfile
+
+# Ignore Git and version control
+.git
+.gitignore
+
+# Ignore common log files
+*.log
+
+# Ignore editor settings
+.vscode
+
+lfxld_langi_bd.sql
+php/.htaccess
+
+php/connect.php

@@ -1,0 +1,10 @@
+AddDefaultCharset UTF-8
+RewriteEngine On
+RewriteCond %{SERVER_PORT} !^443$
+RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
+
+RewriteRule  ^(.*)-na-anglijskom-perevod-primery			item.php?url=$1 [L,QSA]
+RewriteRule  ^(.*)-na-russkom-perevod-primery			item_en.php?url=$1 [L,QSA]
+RewriteRule  ^(.*)-not-found			not-found.php?url=$1 [L,QSA]
+
+ErrorDocument 404 /404.php
