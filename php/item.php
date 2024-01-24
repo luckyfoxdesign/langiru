@@ -64,7 +64,6 @@ function isValueExists($value, $newValue)
     <link rel="icon" sizes="32x32" href="/images/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
     <link rel="stylesheet" href="/css/diki-bundle.css" type="text/css">
-    <script src="/js/diki-bundle.js"></script>
     <script src="/js/clearsearch.js"></script>
     <script src="/js/utils.js"></script>
     <script data-ad-client="ca-pub-3236417930126014" async
@@ -105,7 +104,6 @@ function isValueExists($value, $newValue)
     </div>
     <div id="contentWrapper">
         <div class="dikiBackgroundBannerPlaceholder">
-            <script>Sound.playAndThen('/audio/<?=$searchentext?>.mp3');</script>
             <div class="dikitop">
                 <h1 class="dictionarySectionHeader">
                     <?=$searchword?> перевод на английский
@@ -120,8 +118,8 @@ function isValueExists($value, $newValue)
                                 <h2><span class="hw"><?=$searchentext?></span><span
                                         class="recordingsAndTranscriptions"><span class="en-US hasRecording"
                                                                                   title="Озвучить"><span
-                                                class="audioIcon icon-sound dontprint soundOnClick" tabindex="-1"
-                                                data-audio-url="/audio/<?=$searchentext?>.mp3"></span></span></span>
+                                                class="audioIcon icon-sound dontprint soundOnClick" tabindex="-1" id="elca"
+                                                data-sound="<?=$searchentext?>"></span></span></span>
                                     <span class="dictionaryMeaningGroupHeaderAdditionalInformation">
           </span>
                                 </h2></div>
@@ -156,8 +154,8 @@ while ($exrow = $resultText->fetch_assoc()) {
             </span>
                                         <span class="recordingsAndTranscriptions">
                 <span class="en-GB hasRecording" title="Озвучить текст">
-                    <span class="audioIcon icon-sound dontprint soundOnClick" tabindex="-1"
-                          data-audio-url="/audio/<?=htmlspecialchars(str_replace(" ", "-", $exrow['entext']))?>.mp3"></span>
+                    <span class="audioIcon icon-sound dontprint soundOnClick" tabindex="-1" id="elca"
+                          data-sound="<?=htmlspecialchars(str_replace(" ", "-", $exrow['entext']))?>"></span>
                 </span>
             </span>
                                         <ul class="nativeToForeignMeanings">
@@ -207,7 +205,7 @@ while ($exrow = $resultEnex->fetch_assoc()) {
                                         <span class="recordingsAndTranscriptions">
                 <span class="en-GB hasRecording" title="Озвучить текст">
                     <span class="audioIcon icon-sound dontprint soundOnClick" tabindex="-1"
-                          data-audio-url="/audio/<?=htmlspecialchars(str_replace(" ", "_", $exrow['textout']))?>.mp3"></span>
+                          data-sound="<?=htmlspecialchars(str_replace(" ", "_", $exrow['textout']))?>"></span>
                 </span>
             </span>
                                         <ul class="nativeToForeignMeanings">
@@ -308,8 +306,8 @@ while ($simrow = $query_result->fetch_assoc()) {
       <a href="/<?=$simrow['url']?>-na-anglijskom-perevod-primery" class="plainLink"><?=$simrow['entext']?></a>    </span>
                                         <span class="recordingsAndTranscriptions"><span class="en-GB hasRecording"
                                                                                         title="Озвучить"><span
-                                                    class="audioIcon icon-sound dontprint soundOnClick" tabindex="-1"
-                                                    data-audio-url="/audio/<?=$simrow['entext']?>.mp3"></span></span></span>
+                                                    class="audioIcon icon-sound dontprint soundOnClick" tabindex="-1" id="elca"
+                                                    data-sound="<?=$simrow['entext']?>"></span></span></span>
                                         <span class="otherm"></span>
                                     </div>
                                 </div>

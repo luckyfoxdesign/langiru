@@ -1,12 +1,23 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     const form = document.getElementById('searchForm');
+    const soundIconElements = document.querySelectorAll("#elca")
+
     form.addEventListener('submit', redirectToWordPage);
+    soundIconElements.forEach(e => {
+        e.addEventListener('click', playAudio)
+    })
 });
+
+function playAudio(e) {
+    const soundName = e.target.getAttribute('data-sound')
+    const audio = new Audio(`/audio/${soundName}.mp3`);
+    audio.play();
+}
 
 function getLang(text) {
     const cyrillicPattern = /[А-Яа-яЁё]/;
     const latinPattern = /[A-Za-z]/;
-    
+
     if (cyrillicPattern.test(text)) {
         return "ru"
     } else if (latinPattern.test(text)) {
@@ -17,20 +28,19 @@ function getLang(text) {
         return "-na-anglijskom-perevod-primery";
     }
 }
+
+
 function getSuffixBasedOnLanguage(text) {
     const cyrillicPattern = /[А-Яа-яЁё]/;
     const latinPattern = /[A-Za-z]/;
 
     if (cyrillicPattern.test(text)) {
         return "-na-anglijskom-perevod-primery";
-        console.log("na angl")
     } else if (latinPattern.test(text)) {
         return "-na-russkom-perevod-primery";
-        console.log("na rusk")
     } else {
         // Если язык не определен, можно использовать значение по умолчанию
         // или какую-то логику обработки неизвестного языка
-        console.log("na rusk")
         return "-na-anglijskom-perevod-primery";
     }
 }
@@ -47,7 +57,7 @@ function transliterateString(str, length = 32) {
         "", "", ".", "", "", ""
     ];
 
-    let out = str.split("").map(function(char) {
+    let out = str.split("").map(function (char) {
         const index = from.indexOf(char);
         return index !== -1 ? to[index] : char;
     }).join("");

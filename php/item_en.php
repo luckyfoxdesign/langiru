@@ -54,7 +54,6 @@ if ($isQuerySuccssfull) {
     <link rel="icon" sizes="32x32" href="/images/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
     <link rel="stylesheet" href="/css/diki-bundle.css" type="text/css">
-    <script src="/js/diki-bundle.js"></script>
     <script src="/js/clearsearch.js"></script>
     <script src="/js/utils.js"></script>
     <script data-ad-client="ca-pub-3236417930126014" async
@@ -96,7 +95,6 @@ if ($isQuerySuccssfull) {
     </div>
     <div id="contentWrapper">
         <div class="dikiBackgroundBannerPlaceholder">
-            <script>Sound.playAndThen('/audio/<?=$searchentext?>.mp3');</script>
             <div class="dikitop">
                 <h1 class="dictionarySectionHeader">
                     <?= $searchword ?> перевод на русский
@@ -112,7 +110,8 @@ if ($isQuerySuccssfull) {
                                         class="recordingsAndTranscriptions"><span class="en-US hasRecording"
                                                                                   title="Озвучить"><span
                                                 class="audioIcon icon-sound dontprint soundOnClick" tabindex="-1"
-                                                data-audio-url="/audio/<?= $searchentext ?>.mp3"></span></span></span>
+                                                id="elca"
+                                                data-sound="<?= $searchentext ?>"></span></span></span>
                                     <span class="dictionaryMeaningGroupHeaderAdditionalInformation">
           </span>
                                 </h2></div>
@@ -124,11 +123,11 @@ if ($isQuerySuccssfull) {
 
                                 <?
                                 $stmtText = $db->prepare("
-    SELECT t1.hashru AS hashrut, t1.entext, t1.rutext, t1.hashen, MIN(t1.id) AS min_id
+    SELECT t1.hashru AS hashrut, t1.entext, t1.rutext, t1.hashen, t1.rutooltip, MIN(t1.id) AS min_id
     FROM text AS t1
     LEFT JOIN enmean AS t2 ON t1.hashen = t2.hashin
     WHERE t1.hashen = ? 
-    GROUP BY t1.rutext, t1.hashru, t1.entext, t1.hashen
+    GROUP BY t1.rutext, t1.hashru, t1.entext, t1.hashen, t1.rutooltip
     ORDER BY MIN(t1.id) ASC 
     LIMIT 40
 ");

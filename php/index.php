@@ -2,7 +2,12 @@
 include "connect.php";
 require_once 'vendor/autoload.php';
 
-$loader = new \Twig\Loader\FilesystemLoader('./templates/');
+$loader = new \Twig\Loader\FilesystemLoader([
+    './templates',
+    './templates/components/',
+    './templates/components/common',
+]);
+
 $twig = new \Twig\Environment($loader, [
     'cache' => './templates/cache/',
     'debug' => true,

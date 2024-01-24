@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Слово не найдено</title>
+    {% include "favicon.twig" %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <script src="/js/utils.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-indigo-50">
+    <div class="mx-2 pt-16 flex flex-col gap-12">
+        {% include './components/v-logo-search.twig' %}
+        <section class="flex flex-col items-center justify-center w-full gap-12">
+            <div class=" sm:w-6/12 p-4 bg-white w-full rounded shadow-md">
+                <p class="text-lg font-semibold mb-2">По вашему запросу у нас пока ничего нет.</p>
+                <p class="text-gray-600">Проверьте нет ли опечатки. Если такое слово существует, то мы постараемся это
+                    исправить.</p>
+            </div>
+        </section>
+    </div>
+    {% include './components/common/metrica-counter.twig' %}
+</body>
+
+</html>

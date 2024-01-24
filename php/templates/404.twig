@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница не найдена</title>
+    <link rel="stylesheet" href="/css/normalize.css">
+    <script src="/js/utils.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-indigo-50">
+    <div class="mx-2 pt-16 flex flex-col gap-12">
+        {% include 'v-logo-search.twig' %}
+        <section class="flex flex-col items-center justify-center w-full gap-12">
+            <div class=" sm:w-6/12 p-4 bg-white w-full rounded shadow-md">
+                <p class="text-lg font-semibold mb-2">Страница не найдена</p>
+                {# <p class="text-gray-600">Проверьте нет ли опечатки в адресной строке.</p> #}
+            </div>
+        </section>
+    </div>
+    {% include 'metrica-counter.twig' %}
+</body>
+
+</html>

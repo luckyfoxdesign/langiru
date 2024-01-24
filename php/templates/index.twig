@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description"
 		content="Русско-английский словарь и онлайн-переводчик английского языка. Словарь содержит записи произношения, примеры предложений и фотографии.">
-	{% include 'favicon.twig' %}
+	{% include './components/common/favicon.twig' %}
 	<title>Русско-английский онлайн-переводчик и словарь</title>
 
 	<link rel="stylesheet" href="/css/normalize.css">
@@ -15,57 +15,11 @@
 	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-{#
-
-<body class="bg-indigo-50">
-	<div class="mx-2 pt-16">
-		<section class="flex flex-wrap items-center justify-center w-full gap-16">
-			<div class="w-full md:w-6/12 lg:w-4/12 xl:w-3/12 flex flex-col justify-center gap-4">
-				{% include './common/logo.twig' %}
-				<h1 class="text-left">Мультимедийный русско-английский словарь</h1>
-			</div>
-			<div class="w-full md:w-6/12 lg:w-4/12 xl:w-3/12 flex flex-col gap-1">
-				{% include 'search-input.twig' %}
-				{% include 'recent-searches.twig' %}
-			</div>
-		</section>
-		<section class="flex flex-wrap justify-center w-full mt-4 gap-4">
-			<div class="bg-white shadow p-4 md:w-6/12 lg:w-4/12 xl:w-3/12">Content</div>
-		</section>
-	</div>
-
-	{% include './common/metrica-counter.twig' %}
-</body> #}
-
-
-
-
-
 <body class="bg-indigo-50">
 	<div class="mx-2 pt-16 flex flex-col gap-16">
-		<section class="flex flex-col items-center justify-center w-full gap-12">
-			<div class="w-full sm:w-6/12 flex flex-col-2 justify-center gap-4">
-				{% include './common/logo.twig' %}
-				<h1 class="w-40 text-left">Мультимедийный русско-английский словарь</h1>
-			</div>
-			<div class="w-full sm:w-6/12 flex flex-col gap-1">
-				{% include 'search-input.twig' %}
-				{% include 'recent-searches.twig' %}
-			</div>
-		</section>
-		{# <section class="flex flex-col gap-4 mt-4">
-			<section class="flex flex-wrap justify-center w-full mt-4 gap-4">
-				md:w-4/12 lg:w-6/12 xl:w-8/12
-				<div class="bg-white shadow w-full p-4 sm:w-10/12 rounded-md">
-					<h2 class="text-lg">Случайное слово</h2>
-					<div>
-
-					</div>
-				</div>
-			</section> #}
+		{% include 'v-logo-search.twig' %}
 	</div>
-
-	{% include './common/metrica-counter.twig' %}
+	{% include './components/common/metrica-counter.twig' %}
 </body>
 
 </html>
