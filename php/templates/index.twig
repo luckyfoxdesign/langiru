@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html lang="ru">
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description"
-		content="Русско-английский словарь и онлайн-переводчик английского языка. Словарь содержит записи произношения, примеры предложений и фотографии.">
-	{% include './components/common/favicon.twig' %}
-	<title>Русско-английский онлайн-переводчик и словарь</title>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Русско-английский словарь и онлайн-переводчик английского языка. Словарь содержит записи произношения, примеры предложений и фотографии.">
+		{% include './components/common/favicon.twig' %}
+		<title>Русско-английский онлайн-переводчик и словарь</title>
 
-	<link rel="stylesheet" href="/css/normalize.css">
+		 <script src="/js/utils.js"></script>
+		<link rel="stylesheet" href="/css/styles.css">
+	</head>
 
-	<script src="/js/utils.js"></script>
-	<script src="https://cdn.tailwindcss.com"></script>
-</head>
-
-<body class="bg-indigo-50">
-	<div class="mx-2 pt-16 flex flex-col gap-16">
-		{% include 'v-logo-search.twig' %}
-	</div>
-	{% include './components/common/metrica-counter.twig' %}
-</body>
+	<body class="bg-indigo-50">
+		<div class="mx-2 pt-16 flex flex-col gap-16">
+			{% include 'v-logo-search.twig' %}
+		</div>
+		{% include './components/common/metrica-counter.twig' %}
+	</body>
 
 </html>

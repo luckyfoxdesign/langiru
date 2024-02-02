@@ -24,3 +24,5 @@ php/vendor
 php/templates/cache/*
 config/connect.php
 *.xml
+*lock.json
+node_modules

@@ -14,15 +14,15 @@ $twig = new \Twig\Environment($loader, [
 ]);
 
 // Здесь выполняется запрос к базе данных и обработка данных
-$query = "SELECT * FROM text WHERE orders = '1' ORDER BY id ASC LIMIT 3";
-// $query = "SELECT * FROM text WHERE orders = '1' ORDER BY RAND() LIMIT 3";
-$query_result = $db->query($query);
-$popular_words = [];
+// $query = "SELECT * FROM text WHERE orders = '1' ORDER BY id ASC LIMIT 3";
+// // $query = "SELECT * FROM text WHERE orders = '1' ORDER BY RAND() LIMIT 3";
+// $query_result = $db->query($query);
+// $popular_words = [];
 
-while ($row = $query_result->fetch_assoc()) {
-    $popular_words[] = $row;
-}
+// while ($row = $query_result->fetch_assoc()) {
+//     $popular_words[] = $row;
+// }
 
 // Передача данных в шаблон
-echo $twig->render('index.twig', ['popular_words' => $popular_words]);
+echo $twig->render('index.twig');
 ?>
