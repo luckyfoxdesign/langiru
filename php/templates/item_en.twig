@@ -1,0 +1,70 @@
+{% extends "item_layout.twig" %}
+
+{% block seohead %}
+	<title>
+		{{search_value}}
+		— перевод на Русский с примерами в тексте, произношение
+	</title>
+	<meta name="description" content="Как сказать {{searchValue}} на русском. Как произнести {{searchValue}} и как написать по-русски? Примеры предложений и правильное произношение слушать онлайн.">
+{% endblock %}
+
+{% block page_h1 %}
+	<span class="font-bold">"{{ search_value }}"</span>
+	перевод на русский
+{% endblock %}
+
+{% block search_word_details %}
+	<span>Слово
+		<span class="font-bold">"{{ search_value }}"</span>
+		на русский язык переводится как
+		<span class="font-bold">"{{searchword_ru}}"</span>
+	</span>
+{% endblock %}
+
+{% block examples_list_word %}
+	{% if entry.exists %}
+		<a href="/{{ entry.rutext }}-na-anglijskom-perevod-primery" class="text-blue-600 dark:text-blue-500 hover:underline focus:outline-none  focus-visible:ring-2 focus-visible:ring-blue-500 focus:ring-offset-2 rounded" aria-label="Перевод слова {{ entry.text }} на русский">{{ entry.rutext}}</a>
+	{% else %}
+		<h3 class="text-lg">{{ entry.rutext|e }}</h3>
+	{% endif %}
+{% endblock %}
+
+{% block examples_list_pairs %}
+	<span class="">
+		{{example.src[0]}}
+		<span class="italic bg-amber-100">{{example.src[1]}}</span>
+		{{example.src[2]}}</span>
+</br>
+<span class="text-slate-500">{{example.dst[0]}}
+	<span class="italic bg-amber-100">{{example.dst[1]}}</span>
+	{{example.dst[2]}}
+</span>{% endblock %}{% block synonyms_list %}
+<span>
+	<a href="/{{ entry.url }}-na-anglijskom-perevod-primery" class="text-blue-600 dark:text-blue-500 hover:underline focus:outline-none  focus-visible:ring-2 focus-visible:ring-blue-500 focus:ring-offset-2 rounded">{{
+		entry.text|e }}</a>
+</span>
+<span>=</span>
+<span>
+	<a href="/{{ entry.entext }}-na-russkom-perevod-primery" class="text-blue-600 dark:text-blue-500 hover:underline focus:outline-none  focus-visible:ring-2 focus-visible:ring-blue-500 focus:ring-offset-2 rounded">{{
+		entry.entext|e }}</a>
+</span>{% endblock %}{% block related_words %}
+<span class="">
+	<a href="/{{ entry.url }}-na-anglijskom-perevod-primery" class="text-blue-600 dark:text-blue-500 hover:underline focus:outline-none  focus-visible:ring-2 focus-visible:ring-blue-500 focus:ring-offset-2 rounded">{{
+		entry.text|e }}</a>
+</span>
+<span>=</span>
+<span class="">
+	<a href="/{{ entry.entext }}-na-russkom-perevod-primery" class="text-blue-600 dark:text-blue-500 hover:underline focus:outline-none  focus-visible:ring-2 focus-visible:ring-blue-500 focus:ring-offset-2 rounded">{{
+		entry.entext|e }}</a>
+</span>{% endblock %}{% block similar_phrases_en_ru_pair %}
+<span>{{ entry.textout|e }}</span>
+<span>-</span>
+<span>{{ entry.textin|e }}</span>{% endblock %}{% block similar_phrases_examples %}
+<span>
+	{{example.dst[0]}}
+	<span class="italic bg-amber-100">{{example.dst[1]}}</span>
+	{{example.dst[2]}}
+</span></br><span class="text-slate-500">
+{{example.src[0]}}
+<span class="italic bg-amber-100">{{example.src[1]}}</span>
+{{example.src[2]}}</span>{% endblock %}

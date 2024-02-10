@@ -16,27 +16,6 @@ $twig = new \Twig\Environment($loader, [
 ]);
 
 $urlwords = htmlspecialchars($_GET["url"]);
-function translateToUrl($str = '', $length = 32)
-{
-    $from = array('А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я'
-        , 'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я'
-        , '!', '?', '.', ',', ':', ';',
-    );
-    $to = array('A', 'B', 'V', 'G', 'D', 'E', 'YO', 'ZH', 'Z', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'KH', 'TS', 'CH', 'SH', 'SHCH', '', 'Y', '', 'E', 'YU', 'YA'
-        , 'a', 'b', 'v', 'g', 'd', 'e', 'yo', 'zh', 'z', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'kh', 'ts', 'ch', 'sh', 'shch', '', 'y', '', 'e', 'yu', 'ya'
-        , '', '', '.', '', '', '',
-    );
-    $out = strtolower(str_replace($from, $to, trim($str)));
-    $out = preg_replace("/([^a-z0-9-]{1})/", '-', $out);
-    $out = preg_replace("/([-]+)/", '-', $out);
-    if (substr($out, -1) == '-') {
-        $out = substr($out, 0, -1);
-    }
-
-    $out = substr($out, 0, $length);
-    return $out;
-
-}
 
 //new
 $stmt = $db->prepare("SELECT rutext, hashru, hashen, rutooltip, entext FROM text WHERE url = ? AND orders = 1 LIMIT 1");
@@ -55,7 +34,7 @@ if ($isQuerySuccssfull) {
         header($str);
         exit;
     }
-    $searchValue = $results_arr['rutext'];
+    $search_value = $results_arr['rutext'];
     $searchwordhashru = $results_arr['hashru'];
     $searchenhash = $results_arr['hashen'];
     $rutooltip = $results_arr['rutooltip'];
@@ -70,7 +49,7 @@ $stmtText->bind_param("s", $searchwordhashru);
 $stmtText->execute();
 $resultText = $stmtText->get_result();
 
-$textEntries = [];
+$text_entries = [];
 // что это такое тут запрашивается?
 while ($exrow = $resultText->fetch_assoc()) {
     $stmtExamples = $db->prepare("SELECT * FROM examples WHERE hashen = ? AND hashru = ? ORDER BY id LIMIT 3");
@@ -109,7 +88,7 @@ while ($exrow = $resultText->fetch_assoc()) {
         echo "Error executing query: " . $db->error;
     }
 
-    $textEntries[] = $exrow;
+    $text_entries[] = $exrow;
 
     // print_r($examples);
 }
@@ -128,7 +107,6 @@ while ($exrow = $resultEnex->fetch_assoc()) {
     $resultExamples = $stmtExamples->get_result();
 
     $examples = [];
-    $parts = [];
     // что это такое тут запрашивается?
     while ($exrowsub = $resultExamples->fetch_assoc()) {
 
@@ -148,7 +126,7 @@ while ($exrow = $resultEnex->fetch_assoc()) {
 }
 
 $stmt = $db->prepare("SELECT * FROM syn as t1 RIGHT JOIN text as t2 ON t1.hashout = t2.hashru WHERE t1.hashin = ? and t2.orders = '1' LIMIT 8");
-$searchword_md5 = md5($searchValue);
+$searchword_md5 = md5($search_value);
 $stmt->bind_param("s", $searchword_md5);
 $stmt->execute();
 $query_result = $stmt->get_result();
@@ -164,7 +142,7 @@ while ($simrow = $query_result->fetch_assoc()) {
 }
 
 $stmt = $db->prepare("SELECT * FROM deriv as t1 RIGHT JOIN text as t2 ON t1.hashout = t2.hashru WHERE t1.hashin = ? and t2.orders = '1' LIMIT 8");
-$searchword_md5 = md5($searchValue);
+$searchword_md5 = md5($search_value);
 $stmt->bind_param("s", $searchword_md5);
 $stmt->execute();
 $query_result = $stmt->get_result();
@@ -180,8 +158,8 @@ while ($simrow = $query_result->fetch_assoc()) {
 }
 
 echo $twig->render('item.twig', [
-    'textEntries' => $textEntries,
-    'searchValue' => $searchValue,
+    'text_entries' => $text_entries,
+    'search_value' => $search_value,
     'searchentext' => $searchentext,
     'rutooltip' => $rutooltip,
     'enexEntries' => $enexEntries,

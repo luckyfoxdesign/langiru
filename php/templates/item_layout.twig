@@ -41,18 +41,11 @@
                         <div class="flex flex-col bg-white p-6 rounded w-full lg:mr-8">
                             <h2 class="text-xl">Примеры c синонимами</h2>
                             <ol class="list-decimal pl-5 m-0">
-                                {% for entry in textEntries %}
+                                {% for entry in text_entries %}
                                 <li class="pt-6">
                                     <div>
                                         <span class="flex flex-col-2 gap-x-2 items-center">
-                                            {% if entry.exists %}
-                                            <a href="/{{ entry.entext }}-na-russkom-perevod-primery"
-                                                class="text-blue-600 dark:text-blue-500 hover:underline focus:outline-none  focus-visible:ring-2 focus-visible:ring-blue-500 focus:ring-offset-2 rounded"
-                                                aria-label="Перевод слова {{ entry.entext }} на русский">{{ entry.entext
-                                                }}</a>
-                                            {% else %}
-                                            <h3 class="text-lg">{{ entry.entext|e }}</h3>
-                                            {% endif %}
+                                            {% block examples_list_word %}{% endblock %}
                                             {# <span class="cursor-pointer" title="Озвучить текст" tabindex="-1"
                                                 id="elca" data-sound="{{ entry.entext|replace({' ': '-'})|e }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.13 24.64"
@@ -67,7 +60,10 @@
                                     <ul class="pt-4 pb-4 list-disc pl-4 space-y-4">
                                         {% for example in entry.examples %}
                                         <li class="">
-                                            <span class="">
+                                            <span>
+                                                {% block examples_list_pairs %}{% endblock %}
+                                            </span>
+                                            {# <span class="">
                                                 <span>
                                                     {{example.dst[0]}}
                                                     <span class="italic bg-amber-100">{{example.dst[1]}}</span>
@@ -77,9 +73,8 @@
                                                 <span class="text-slate-500">
                                                     {{example.src[0]}}
                                                     <span class="italic bg-amber-100">{{example.src[1]}}</span>
-                                                    {{example.src[2]}}
-                                                </span>
-                                            </span>
+                                                    {{example.src[2]}}</span>
+                                            </span> #}
                                         </li>
                                         {% endfor %}
                                     </ul>
@@ -102,18 +97,7 @@
                                         {% for entry in dictionaryEntries %}
                                         <li>
                                             <div class="flex flex-col-2 space-x-2">
-                                                <span>
-                                                    <a href="/{{ entry.url }}-na-anglijskom-perevod-primery"
-                                                        class="text-blue-600 dark:text-blue-500 hover:underline focus:outline-none  focus-visible:ring-2 focus-visible:ring-blue-500 focus:ring-offset-2 rounded">{{
-                                                        entry.text|e }}</a>
-                                                </span>
-                                                <span>=</span>
-                                                <span>
-                                                    <a href="/{{ entry.entext }}-na-russkom-perevod-primery"
-                                                        class="text-blue-600 dark:text-blue-500 hover:underline focus:outline-none  focus-visible:ring-2 focus-visible:ring-blue-500 focus:ring-offset-2 rounded">{{
-                                                        entry.entext|e }}</a>
-                                                    </a>
-                                                </span>
+                                                {% block synonyms_list %}{% endblock %}
                                             </div>
                                         </li>
                                         {% endfor %}
@@ -134,17 +118,7 @@
                                         {% for entry in derivEntries %}
                                         <li>
                                             <div class="flex flex-col-2 space-x-2">
-                                                <span class="">
-                                                    <a href="/{{ entry.url }}-na-anglijskom-perevod-primery"
-                                                        class="text-blue-600 dark:text-blue-500 hover:underline focus:outline-none  focus-visible:ring-2 focus-visible:ring-blue-500 focus:ring-offset-2 rounded">{{
-                                                        entry.text|e }}</a>
-                                                </span>
-                                                <span>=</span>
-                                                <span class="">
-                                                    <a href="/{{ entry.entext }}-na-russkom-perevod-primery"
-                                                        class="text-blue-600 dark:text-blue-500 hover:underline focus:outline-none  focus-visible:ring-2 focus-visible:ring-blue-500 focus:ring-offset-2 rounded">{{
-                                                        entry.entext|e }}</a>
-                                                </span>
+                                                {% block related_words %}{% endblock %}
                                                 {# <span class="cursor-pointer" title="Озвучить текст" tabindex="-1"
                                                     id="elca" data-sound="{{ entry.entext|replace({' ': '-'})|e }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.13 24.64"
@@ -182,31 +156,19 @@
                             <li class="pt-6">
                                 <div class="flex flex-col space-x-2">
                                     <div class="flex flex-col-3 gap-1">
-                                        <span>{{ entry.textout|e }}</span>
-                                        <span>-</span>
+                                        {% block similar_phrases_en_ru_pair %}{% endblock %}
                                         {# <span class="recordingsAndTranscriptions">
                                             <span class="en-GB hasRecording" title="Озвучить текст">
                                                 <span class="audioIcon icon-sound dontprint soundOnClick" tabindex="-1"
                                                     id="elca" data-sound="{{entry.textout|e}}"></span>
                                             </span>
                                         </span> #}
-                                        <span>{{ entry.textin|e }}</span>
                                     </div>
                                     <ul class="pt-4 pb-4 list-disc pl-4 space-y-4">
                                         {% if entry.examples|length != 0 %}
                                         {% for example in entry.examples %}
                                         <li>
-                                            <span>
-                                                {{example.dst[0]}}
-                                                <span class="italic bg-amber-100">{{example.dst[1]}}</span>
-                                                {{example.dst[2]}}
-                                            </span>
-                                            </br>
-                                            <span class="text-slate-500">
-                                                {{example.src[0]}}
-                                                <span class="italic bg-amber-100">{{example.src[1]}}</span>
-                                                {{example.src[2]}}
-                                            </span>
+                                            {% block similar_phrases_examples %}{% endblock %}
                                             {# <div class="exampleSentence">
                                                 {{ example.dst|replace({'<': '<span class="blue">' })|raw }}<br>
                                                     <span class="exampleSentenceTranslation">{{
@@ -215,7 +177,7 @@
                                         </li>
                                         {% endfor %}
                                         {% else %}
-                                        <li>Нет примеров</li>
+                                        <li>Примеры пока не добавлены</li>
                                         {% endif %}
                                     </ul>
                                 </div>
